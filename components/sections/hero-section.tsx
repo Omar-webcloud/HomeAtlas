@@ -143,7 +143,7 @@ export function HeroSection() {
 
             {/* Main Hero Image - Center */}
             <div 
-              className="relative overflow-hidden will-change-transform"
+              className="relative overflow-hidden will-change-transform [container-type:inline-size]"
               style={{
                 width: `${centerWidth}%`,
                 height: `${centerHeight}%`,
@@ -163,13 +163,14 @@ export function HeroSection() {
                   transform: `scale(${1 + mainImageBlur / 100})`,
                 }}
               />
+              <div className="pointer-events-none absolute inset-0 bg-black/15" />
               
               {/* Overlay Text - Fades out first, vertically centered on mobile and bottom-aligned on desktop */}
               <div 
                 className="absolute inset-0 flex items-center justify-center md:items-end md:justify-start overflow-hidden px-3 sm:px-6 md:px-8 pb-0 md:pb-6"
                 style={{ opacity: textOpacity }}
               >
-                <h1 className="w-full text-center md:text-left text-[9.5vw] xs:text-[11vw] sm:text-[13vw] md:text-[15vw] lg:text-[16.5vw] font-medium leading-[0.85] tracking-tight sm:tracking-tighter text-white select-none whitespace-nowrap">
+                <h1 className="w-full text-center md:text-left text-[clamp(1.5rem,13.5cqi,7rem)] font-display font-normal leading-none tracking-[0.04em] text-white select-none whitespace-nowrap">
                   {word.split("").map((letter, index) => (
                     <span
                       key={index}
@@ -222,11 +223,16 @@ export function HeroSection() {
         </div>
 
         <p
-          className="pointer-events-none absolute inset-x-0 z-10 px-6 text-center text-xl leading-relaxed drop-shadow-md sm:text-2xl md:text-3xl lg:text-[2.5rem] lg:leading-snug"
+          className="pointer-events-none absolute left-1/2 z-10 text-center leading-relaxed drop-shadow-md"
           style={{
             top: `${taglineTop}%`,
-            transform: "translateY(-50%)",
+            transform: "translate(-50%, -50%)",
             color: "#fff",
+            width: `calc(${centerWidth}% - ${paddingVal * 2 * centerWidth / 100}px)`,
+            fontSize: `${isMobile
+              ? 16 + ((centerWidth - 48) * 8) / 52
+              : 24 + ((centerWidth - 42) * 16) / 58}px`,
+            lineHeight: 1.25,
           }}
         >
           Curated, timeless
