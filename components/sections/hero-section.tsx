@@ -35,8 +35,14 @@ const sideImages = [
 export function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    handleResize();
+
     const handleScroll = () => {
       if (!sectionRef.current) return;
       
@@ -49,10 +55,12 @@ export function HeroSection() {
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleResize, { passive: true });
     handleScroll();
     
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
@@ -62,28 +70,38 @@ export function HeroSection() {
   // Image transforms start after text fades (0.2 to 1)
   const imageProgress = Math.max(0, Math.min(1, (scrollProgress - 0.2) / 0.8));
   
-  // Smooth interpolations
-  const centerWidth = 100 - (imageProgress * 58); // 100% to 42%
-  const centerHeight = 100 - (imageProgress * 30); // 100% to 70%
-  const sideWidth = imageProgress * 22; // 0% to 22%
+  // Smooth interpolations (optimized for both mobile and desktop)
+  const centerWidth = isMobile 
+    ? 100 - (imageProgress * 24) // 100% to 76% on mobile so image stays prominent
+    : 100 - (imageProgress * 58); // 100% to 42% on desktop
+  const centerHeight = isMobile
+    ? 100 - (imageProgress * 20)
+    : 100 - (imageProgress * 30);
+  const sideWidth = isMobile
+    ? imageProgress * 12
+    : imageProgress * 22;
   const sideOpacity = imageProgress;
-  const sideTranslateLeft = -100 + (imageProgress * 100); // -100% to 0%
-  const sideTranslateRight = 100 - (imageProgress * 100); // 100% to 0%
-  const borderRadius = imageProgress * 24; // 0px to 24px
-  const gap = imageProgress * 16; // 0px to 16px
+  const sideTranslateLeft = -100 + (imageProgress * 100);
+  const sideTranslateRight = 100 - (imageProgress * 100);
+  const borderRadius = imageProgress * (isMobile ? 16 : 24);
+  const gap = imageProgress * (isMobile ? 8 : 16);
   
-  // Vertical offset for side columns to move them up on mobile
-  const sideTranslateY = -(imageProgress * 15); // Move up by 15% when fully expanded
+  // Vertical offset for side columns
+  const sideTranslateY = -(imageProgress * (isMobile ? 8 : 15));
 
   return (
     <section ref={sectionRef} className="relative bg-background">
-      {/* Sticky container for scroll animation */}
-      <div className="sticky top-0 h-screen overflow-hidden">
+      {/* Sticky container for scroll animation with 100dvh support */}
+      <div className="sticky top-0 h-screen h-[100dvh] overflow-hidden">
         <div className="flex h-full w-full items-center justify-center">
           {/* Bento Grid Container */}
           <div 
             className="relative flex h-full w-full items-stretch justify-center"
-            style={{ gap: `${gap}px`, padding: `${imageProgress * 16}px`, paddingBottom: `${60 + (imageProgress * 40)}px` }}
+            style={{ 
+              gap: `${gap}px`, 
+              padding: `${imageProgress * (isMobile ? 8 : 16)}px`, 
+              paddingBottom: `${isMobile ? 40 + (imageProgress * 30) : 60 + (imageProgress * 40)}px` 
+            }}
           >
             
             {/* Left Column */}
@@ -138,7 +156,7 @@ export function HeroSection() {
                 className="absolute inset-0 flex items-end overflow-hidden"
                 style={{ opacity: textOpacity }}
               >
-                <h1 className="w-full text-[17vw] font-medium leading-[0.8] tracking-tighter text-white">
+                <h1 className="w-full text-[11.5vw] xs:text-[13vw] sm:text-[15vw] md:text-[17vw] font-medium leading-[0.85] tracking-tight sm:tracking-tighter text-white px-2 sm:px-4">
                   {word.split("").map((letter, index) => (
                     <span
                       key={index}

@@ -19,14 +19,22 @@ export function Header() {
 
   return (
     <header 
-      className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-3xl transition-all duration-300 ${isScrolled ? "bg-background/80 backdrop-blur-md rounded-full" : "bg-transparent"}`}
-      style={{
-        boxShadow: isScrolled ? "rgba(14, 63, 126, 0.04) 0px 0px 0px 1px, rgba(42, 51, 69, 0.04) 0px 1px 1px -0.5px, rgba(42, 51, 70, 0.04) 0px 3px 3px -1.5px, rgba(42, 51, 70, 0.04) 0px 6px 6px -3px, rgba(14, 63, 126, 0.04) 0px 12px 12px -6px, rgba(14, 63, 126, 0.04) 0px 24px 24px -12px" : "none"
-      }}
+      className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[92%] sm:w-[90%] max-w-3xl transition-all duration-300 ${
+        isMenuOpen
+          ? "bg-background text-foreground rounded-2xl shadow-2xl border border-border"
+          : isScrolled
+          ? "bg-background/85 backdrop-blur-md rounded-full shadow-lg border border-border/50"
+          : "bg-transparent"
+      }`}
     >
-      <div className="flex items-center justify-between transition-all duration-300 px-2 pl-5 py-2">
+      <div className="flex items-center justify-between transition-all duration-300 px-3 pl-5 py-2.5 sm:px-2 sm:pl-5 sm:py-2">
         {/* Logo */}
-        <Link href="#" className={`text-lg font-medium tracking-tight transition-colors duration-300 ${isScrolled ? "text-foreground" : "text-white"}`}>
+        <Link 
+          href="#" 
+          className={`text-lg font-medium tracking-tight transition-colors duration-300 ${
+            isMenuOpen || isScrolled ? "text-foreground" : "text-white"
+          }`}
+        >
           HOMEATLAS
         </Link>
 
@@ -68,14 +76,17 @@ export function Header() {
           </Link>
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile Menu Button with 44px minimum touch target */}
         <button
           type="button"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className={`transition-colors md:hidden ${isScrolled ? "text-foreground" : "text-white"}`}
-          aria-label="Toggle menu"
+          className={`flex h-11 w-11 items-center justify-center rounded-full transition-colors md:hidden ${
+            isMenuOpen || isScrolled ? "text-foreground hover:bg-muted" : "text-white hover:bg-white/10"
+          }`}
+          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={isMenuOpen}
         >
-          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
       </div>
 

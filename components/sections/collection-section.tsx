@@ -51,18 +51,21 @@ export function CollectionSection() {
   return (
     <section id="accessories" className="bg-background">
       {/* Section Title */}
-      <div className="px-6 py-20 md:px-12 lg:px-20 md:py-10">
-        <h2 className="text-3xl font-medium tracking-tight text-foreground md:text-4xl">
+      <div className="px-4 sm:px-6 py-12 sm:py-16 md:px-12 lg:px-20 md:py-10">
+        <h2 className="text-2xl sm:text-3xl font-medium tracking-tight text-foreground md:text-4xl">
           Featured Private Residences
         </h2>
       </div>
 
       {/* Accessories Grid/Carousel */}
-      <div className="pb-24">
+      <div className="pb-16 sm:pb-24">
         {/* Mobile: Horizontal Carousel */}
-        <div className="flex gap-6 overflow-x-auto px-6 pb-4 md:hidden snap-x snap-mandatory scrollbar-hide">
+        <div 
+          className="flex gap-4 sm:gap-6 overflow-x-auto px-4 sm:px-6 pb-4 md:hidden snap-x snap-mandatory scrollbar-hide overscroll-x-contain"
+          style={{ WebkitOverflowScrolling: "touch" }}
+        >
           {accessories.map((accessory) => (
-            <div key={accessory.id} className="group flex-shrink-0 w-[75vw] snap-center">
+            <div key={accessory.id} className="group flex-shrink-0 w-[80vw] sm:w-[70vw] snap-center">
               {/* Image */}
               <div className="relative aspect-[2/3] overflow-hidden rounded-2xl bg-secondary">
                 <FadeImage

@@ -36,7 +36,7 @@ function ScrollRevealText({ text }: { text: string }) {
   return (
     <p
       ref={containerRef}
-      className="text-3xl font-semibold leading-snug md:text-4xl lg:text-5xl"
+      className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold leading-snug"
     >
       {words.map((word, index) => {
         const wordProgress = index / words.length;
@@ -90,10 +90,16 @@ export function TechnologySection() {
   const textSectionRef = useRef<HTMLDivElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [textProgress, setTextProgress] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
   
   const descriptionText = "Experience residential living elevated by world-class architecture. Every HomeAtlas estate balances sustainable geothermal climate engineering, panoramic solar-optimized glass, and timeless natural materials. From oceanfront bluffs to alpine summits, each property is an enduring sanctuary in harmony with its surroundings.";
 
   useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    handleResize();
+
     const handleScroll = () => {
       if (!sectionRef.current) return;
       
@@ -121,10 +127,12 @@ export function TechnologySection() {
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleResize, { passive: true });
     handleScroll();
     
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
@@ -134,28 +142,34 @@ export function TechnologySection() {
   // Image transforms start after title fades (0.2 to 1)
   const imageProgress = Math.max(0, Math.min(1, (scrollProgress - 0.2) / 0.8));
   
-  // Smooth interpolations
-  const centerWidth = 100 - (imageProgress * 58); // 100% to 42%
-  const centerHeight = 100 - (imageProgress * 30); // 100% to 70%
-  const sideWidth = imageProgress * 22; // 0% to 22%
+  // Smooth interpolations (responsive for mobile & desktop)
+  const centerWidth = isMobile
+    ? 100 - (imageProgress * 24)
+    : 100 - (imageProgress * 58);
+  const sideWidth = isMobile
+    ? imageProgress * 12
+    : imageProgress * 22;
   const sideOpacity = imageProgress;
-  const sideTranslateLeft = -100 + (imageProgress * 100); // -100% to 0%
-  const sideTranslateRight = 100 - (imageProgress * 100); // 100% to 0%
-  const borderRadius = imageProgress * 24; // 0px to 24px
-  const gap = imageProgress * 16; // 0px to 16px
+  const sideTranslateLeft = -100 + (imageProgress * 100);
+  const sideTranslateRight = 100 - (imageProgress * 100);
+  const borderRadius = imageProgress * (isMobile ? 16 : 24);
+  const gap = imageProgress * (isMobile ? 8 : 16);
 
   // Calculate grayscale for text section based on textProgress
   const grayscaleAmount = Math.round((1 - textProgress) * 100);
 
   return (
     <section ref={sectionRef} className="relative bg-foreground">
-      {/* Sticky container for scroll animation */}
-      <div className="sticky top-0 h-screen overflow-hidden">
+      {/* Sticky container for scroll animation with 100dvh support */}
+      <div className="sticky top-0 h-screen h-[100dvh] overflow-hidden">
         <div className="flex h-full w-full items-center justify-center">
           {/* Bento Grid Container */}
           <div 
             className="relative flex h-full w-full items-stretch justify-center"
-            style={{ gap: `${gap}px`, padding: `${imageProgress * 16}px` }}
+            style={{ 
+              gap: `${gap}px`, 
+              padding: `${imageProgress * (isMobile ? 8 : 16)}px` 
+            }}
           >
             
             {/* Left Column */}
@@ -209,7 +223,7 @@ export function TechnologySection() {
               <div 
                 className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center"
               >
-                <h2 className="max-w-3xl font-medium leading-tight tracking-tight text-white md:text-5xl lg:text-7xl text-5xl">
+                <h2 className="max-w-3xl font-medium leading-tight tracking-tight text-white text-3xl sm:text-5xl md:text-6xl lg:text-7xl">
                   {["Architecture", "Meets", "Sanctuary."].map((word, index) => {
                     // Each word fades out sequentially based on scrollProgress
                     const wordFadeStart = index * 0.07; // Architecture: 0, Meets: 0.07, Sanctuary: 0.14
