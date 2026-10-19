@@ -66,9 +66,11 @@ export function HeroSection() {
 
   // Text fades out first (0 to 0.2)
   const textOpacity = Math.max(0, 1 - (scrollProgress / 0.2));
+  const taglineTop = 110 - Math.min(scrollProgress * 240, 60);
   
   // Image transforms start after text fades (0.2 to 1)
   const imageProgress = Math.max(0, Math.min(1, (scrollProgress - 0.2) / 0.8));
+  const mainImageBlur = Math.max(0, Math.min(1, (imageProgress - 0.7) / 0.3)) * 12;
   
   // Smooth interpolations (optimized so all images are balanced & visible on mobile and desktop)
   const centerWidth = isMobile 
@@ -156,6 +158,10 @@ export function HeroSection() {
                 className="object-cover"
                 sizes={isMobile ? "50vw" : "42vw"}
                 priority
+                style={{
+                  filter: `blur(${mainImageBlur}px)`,
+                  transform: `scale(${1 + mainImageBlur / 100})`,
+                }}
               />
               
               {/* Overlay Text - Fades out first, vertically centered on mobile and bottom-aligned on desktop */}
@@ -214,19 +220,23 @@ export function HeroSection() {
 
           </div>
         </div>
-      </div>
 
-      {/* Scroll space to enable animation */}
-      <div className="h-[200vh]" />
-
-      {/* Tagline Section */}
-      <div className="px-6 pt-20 pb-20 sm:pt-32 sm:pb-28 md:pt-48 md:px-12 md:pb-36 lg:px-20 lg:pt-56 lg:pb-44">
-        <p className="mx-auto max-w-2xl text-center text-2xl leading-relaxed text-muted-foreground md:text-3xl lg:text-[2.5rem] lg:leading-snug">
+        <p
+          className="pointer-events-none absolute inset-x-0 z-10 px-6 text-center text-xl leading-relaxed drop-shadow-md sm:text-2xl md:text-3xl lg:text-[2.5rem] lg:leading-snug"
+          style={{
+            top: `${taglineTop}%`,
+            transform: "translateY(-50%)",
+            color: "#fff",
+          }}
+        >
           Curated, timeless
           <br />
           and architectural sanctuaries.
         </p>
       </div>
+
+      {/* Scroll space to enable animation */}
+      <div className="h-[200vh]" />
     </section>
   );
 }
