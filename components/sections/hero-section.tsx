@@ -90,7 +90,7 @@ export function HeroSection() {
   const sideTranslateY = -(imageProgress * (isMobile ? 8 : 15));
 
   return (
-    <section ref={sectionRef} className="relative bg-background">
+    <section ref={sectionRef} className="relative bg-background overflow-x-clip">
       {/* Sticky container for scroll animation with 100dvh support */}
       <div className="sticky top-0 h-screen h-[100dvh] overflow-hidden">
         <div className="flex h-full w-full items-center justify-center">
@@ -151,12 +151,12 @@ export function HeroSection() {
                 priority
               />
               
-              {/* Overlay Text - Fades out first */}
+              {/* Overlay Text - Fades out first, vertically centered on mobile and bottom-aligned on desktop */}
               <div 
-                className="absolute inset-0 flex items-end overflow-hidden"
+                className="absolute inset-0 flex items-center justify-center md:items-end md:justify-start overflow-hidden px-3 sm:px-6 md:px-8 pb-0 md:pb-6"
                 style={{ opacity: textOpacity }}
               >
-                <h1 className="w-full text-[11.5vw] xs:text-[13vw] sm:text-[15vw] md:text-[17vw] font-medium leading-[0.85] tracking-tight sm:tracking-tighter text-white px-2 sm:px-4">
+                <h1 className="w-full text-center md:text-left text-[9.5vw] xs:text-[11vw] sm:text-[13vw] md:text-[15vw] lg:text-[16.5vw] font-medium leading-[0.85] tracking-tight sm:tracking-tighter text-white select-none whitespace-nowrap">
                   {word.split("").map((letter, index) => (
                     <span
                       key={index}
@@ -211,7 +211,7 @@ export function HeroSection() {
       <div className="h-[200vh]" />
 
       {/* Tagline Section */}
-      <div className="px-6 pt-32 pb-28 md:pt-48 md:px-12 md:pb-36 lg:px-20 lg:pt-56 lg:pb-44">
+      <div className="px-6 pt-20 pb-20 sm:pt-32 sm:pb-28 md:pt-48 md:px-12 md:pb-36 lg:px-20 lg:pt-56 lg:pb-44">
         <p className="mx-auto max-w-2xl text-center text-2xl leading-relaxed text-muted-foreground md:text-3xl lg:text-[2.5rem] lg:leading-snug">
           Curated, timeless
           <br />

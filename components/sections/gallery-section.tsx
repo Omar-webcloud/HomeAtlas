@@ -95,12 +95,12 @@ export function GallerySection() {
       style={{ height: sectionHeight }}
     >
       {/* Sticky container */}
-      <div className="sticky top-0 h-screen overflow-hidden">
+      <div className="sticky top-0 h-screen h-[100dvh] overflow-hidden">
         <div className="flex h-full items-center">
           {/* Horizontal scrolling container */}
           <div 
             ref={containerRef}
-            className="flex gap-6 px-6"
+            className="flex gap-4 sm:gap-6 px-4 sm:px-6"
             style={{
               transform: `translate3d(${translateX}px, 0, 0)`,
               WebkitTransform: `translate3d(${translateX}px, 0, 0)`,
@@ -114,7 +114,7 @@ export function GallerySection() {
             {images.map((image, index) => (
               <div
                 key={index}
-                className="relative h-[70vh] w-[85vw] flex-shrink-0 overflow-hidden rounded-2xl md:w-[60vw] lg:w-[45vw]"
+                className="relative h-[62vh] sm:h-[70vh] w-[85vw] sm:w-[75vw] flex-shrink-0 overflow-hidden rounded-xl sm:rounded-2xl md:w-[60vw] lg:w-[45vw]"
                 style={{
                   transform: 'translateZ(0)',
                   WebkitTransform: 'translateZ(0)',

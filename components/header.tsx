@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -18,22 +17,20 @@ export function Header() {
   }, []);
 
   return (
-    <header 
-      className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[92%] sm:w-[90%] max-w-3xl transition-all duration-300 ${
-        isMenuOpen
+    <header
+      className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[92%] sm:w-[90%] max-w-3xl transition-all duration-300 ${isMenuOpen
           ? "bg-background text-foreground rounded-2xl shadow-2xl border border-border"
           : isScrolled
-          ? "bg-background/85 backdrop-blur-md rounded-full shadow-lg border border-border/50"
-          : "bg-transparent"
-      }`}
+            ? "bg-background/85 backdrop-blur-md rounded-full shadow-lg border border-border/50"
+            : "bg-transparent"
+        }`}
     >
       <div className="flex items-center justify-between transition-all duration-300 px-3 pl-5 py-2.5 sm:px-2 sm:pl-5 sm:py-2">
         {/* Logo */}
-        <Link 
-          href="#" 
-          className={`text-lg font-medium tracking-tight transition-colors duration-300 ${
-            isMenuOpen || isScrolled ? "text-foreground" : "text-white"
-          }`}
+        <Link
+          href="#"
+          className={`text-lg font-medium tracking-tight transition-colors duration-300 ${isMenuOpen || isScrolled ? "text-foreground" : "text-white"
+            }`}
         >
           HOMEATLAS
         </Link>
@@ -76,7 +73,7 @@ export function Header() {
           </Link>
         </div>
 
-        {/* Mobile Menu Button with 44px minimum touch target */}
+        {/* Mobile Menu Button with 44px minimum touch target & 2-bar toggle */}
         <button
           type="button"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -86,7 +83,22 @@ export function Header() {
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           aria-expanded={isMenuOpen}
         >
-          {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
+          <div className="relative flex flex-col items-center justify-center w-5 h-5 gap-1.5" aria-hidden="true">
+            <span
+              className={`block h-[1.75px] w-5 rounded-full transition-all duration-300 origin-center ${
+                isMenuOpen
+                  ? "translate-y-[3.875px] rotate-45"
+                  : ""
+              } ${isMenuOpen || isScrolled ? "bg-foreground" : "bg-white"}`}
+            />
+            <span
+              className={`block h-[1.75px] w-5 rounded-full transition-all duration-300 origin-center ${
+                isMenuOpen
+                  ? "-translate-y-[3.875px] -rotate-45"
+                  : ""
+              } ${isMenuOpen || isScrolled ? "bg-foreground" : "bg-white"}`}
+            />
+          </div>
         </button>
       </div>
 

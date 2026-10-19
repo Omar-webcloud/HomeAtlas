@@ -39,19 +39,19 @@ export function FeaturedProductsSection() {
   return (
     <section id="technology" className="bg-background">
       {/* Section Title */}
-      <div className="px-6 py-20 text-center md:px-12 md:py-28 lg:px-20 lg:py-32 lg:pb-20">
-        <h2 className="text-3xl font-medium tracking-tight text-foreground md:text-4xl lg:text-5xl">
+      <div className="px-5 py-14 sm:py-20 text-center md:px-12 md:py-28 lg:px-20 lg:py-32 lg:pb-20">
+        <h2 className="text-2xl sm:text-3xl font-medium tracking-tight text-foreground md:text-4xl lg:text-5xl">
           Engineered for Living.
           <br />
           Designed for Distinction.
         </h2>
-        <p className="mx-auto mt-6 max-w-md text-sm text-muted-foreground">
+        <p className="mx-auto mt-4 sm:mt-6 max-w-md text-xs sm:text-sm text-muted-foreground">
           Architectural Elements
         </p>
       </div>
 
       {/* Features Grid */}
-      <div className="grid grid-cols-1 gap-4 px-6 pb-20 md:grid-cols-3 md:px-12 lg:px-20">
+      <div className="grid grid-cols-1 gap-6 sm:gap-4 px-5 sm:px-6 pb-16 sm:pb-20 md:grid-cols-3 md:px-12 lg:px-20">
         {features.map((feature) => (
           <div key={feature.title} className="group">
             {/* Image */}
