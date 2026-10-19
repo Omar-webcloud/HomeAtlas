@@ -4,22 +4,22 @@ import Link from "next/link";
 
 const footerLinks = {
   explore: [
-    { label: "Products", href: "#products" },
-    { label: "Technology", href: "#technology" },
+    { label: "Residences", href: "#products" },
+    { label: "Architecture", href: "#technology" },
     { label: "Gallery", href: "#gallery" },
-    { label: "Accessories", href: "#accessories" },
+    { label: "Portfolio", href: "#accessories" },
   ],
   about: [
     { label: "Our Story", href: "#" },
-    { label: "Team", href: "#" },
-    { label: "Careers", href: "#" },
-    { label: "Contact", href: "#" },
+    { label: "Architectural Partners", href: "#" },
+    { label: "Advisory", href: "#" },
+    { label: "Private Office", href: "#" },
   ],
   service: [
-    { label: "FAQ", href: "#" },
-    { label: "Shipping", href: "#" },
-    { label: "Returns", href: "#" },
-    { label: "Warranty", href: "#" },
+    { label: "Private Viewings", href: "#" },
+    { label: "Acquisitions", href: "#" },
+    { label: "Dispositions", href: "#" },
+    { label: "Press & Media", href: "#" },
   ],
 };
 
@@ -32,10 +32,10 @@ export function FooterSection() {
           {/* Brand */}
           <div className="col-span-2 md:col-span-1 lg:col-span-2">
             <Link href="/" className="text-lg font-medium text-foreground">
-              EVASION
+              HOMEATLAS
             </Link>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
-              Premium smart bottles engineered for adventure. GPS tracking, LED flashlight, and self-heating technology.
+              Curator of the world's most distinguished architectural residences, modern sanctuaries, and trophy estates.
             </p>
           </div>
 
@@ -96,7 +96,7 @@ export function FooterSection() {
       <div className="border-t border-border px-6 py-6 md:px-12 lg:px-20">
         <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
           <p className="text-xs text-muted-foreground">
-            2026 EVASION. All rights reserved.
+            © 2026 HOMEATLAS. All rights reserved.
           </p>
 
           

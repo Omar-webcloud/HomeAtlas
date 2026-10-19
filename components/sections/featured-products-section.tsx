@@ -4,34 +4,34 @@ import { FadeImage } from "@/components/fade-image";
 
 const features = [
   {
-    title: "Smart Temperature Control",
-    description: "Innovation",
-    image: "/images/d18fe616-5596-4559-90f5-a90f5397d0d8.png",
+    title: "Smart Environmental Automation",
+    description: "Intelligence",
+    image: "/images/feature-smarthome.jpg",
   },
   {
-    title: "Ultra-Light Carbon Frame",
-    description: "Performance",
-    image: "/images/e26fa9c3-966d-4966-94a4-954a1e511c1c.png",
+    title: "Cantilevered Structural Engineering",
+    description: "Architecture",
+    image: "/images/feature-architecture.jpg",
   },
   {
-    title: "Weather-Resistant Design",
-    description: "Durability",
-    image: "/images/car.jpg",
+    title: "Panoramic Horizon Terraces",
+    description: "Vistas",
+    image: "/images/feature-panoramic.jpg",
   },
   {
-    title: "Integrated GPS Tracking",
-    description: "Navigation",
-    image: "/images/204cee22-9e85-49e8-9303-1d309af626b0.png",
+    title: "Sunken Fire Lounges & Pools",
+    description: "Sanctuary",
+    image: "https://images.unsplash.com/photo-1613977257363-707ba9348227?q=80&w=1200",
   },
   {
-    title: "Built-In LED Flashlight",
-    description: "Visibility",
-    image: "/images/led-flashlight-bottle.png",
+    title: "Double-Height Glass & Light",
+    description: "Spatial Harmony",
+    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200",
   },
   {
-    title: "Self-Heating Technology",
-    description: "Comfort",
-    image: "/images/heating-campfire.png",
+    title: "Bespoke Stone & Millwork Finishes",
+    description: "Craftsmanship",
+    image: "https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?q=80&w=1200",
   },
 ];
 
@@ -41,12 +41,12 @@ export function FeaturedProductsSection() {
       {/* Section Title */}
       <div className="px-6 py-20 text-center md:px-12 md:py-28 lg:px-20 lg:py-32 lg:pb-20">
         <h2 className="text-3xl font-medium tracking-tight text-foreground md:text-4xl lg:text-5xl">
-          Engineered for Excellence.
+          Engineered for Living.
           <br />
-          Designed for Adventure.
+          Designed for Distinction.
         </h2>
         <p className="mx-auto mt-6 max-w-md text-sm text-muted-foreground">
-          Technology
+          Architectural Elements
         </p>
       </div>
 

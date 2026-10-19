@@ -1,10 +1,10 @@
 "use client";
 
 const specs = [
-  { label: "Weight", value: "400g" },
-  { label: "Capacity", value: "0.5L - 2L" },
-  { label: "Setup", value: "2 min" },
-  { label: "Packed size", value: "30 x 15 cm" },
+  { label: "Portfolio Value", value: "$2.4B+" },
+  { label: "Global Destinations", value: "34" },
+  { label: "Private Estates", value: "140+" },
+  { label: "Client Satisfaction", value: "99.4%" },
 ];
 
 export function EditorialSection() {

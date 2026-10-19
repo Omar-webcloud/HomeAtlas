@@ -27,7 +27,7 @@ export function Header() {
       <div className="flex items-center justify-between transition-all duration-300 px-2 pl-5 py-2">
         {/* Logo */}
         <Link href="#" className={`text-lg font-medium tracking-tight transition-colors duration-300 ${isScrolled ? "text-foreground" : "text-white"}`}>
-          EVASION
+          HOMEATLAS
         </Link>
 
         {/* Desktop Navigation */}
@@ -36,13 +36,13 @@ export function Header() {
             href="#products"
             className={`text-sm transition-colors ${isScrolled ? "text-muted-foreground hover:text-foreground" : "text-white/70 hover:text-white"}`}
           >
-            Products
+            Residences
           </Link>
           <Link
             href="#technology"
             className={`text-sm transition-colors ${isScrolled ? "text-muted-foreground hover:text-foreground" : "text-white/70 hover:text-white"}`}
           >
-            Technology
+            Architecture
           </Link>
           <Link
             href="#gallery"
@@ -54,7 +54,7 @@ export function Header() {
             href="#accessories"
             className={`text-sm transition-colors ${isScrolled ? "text-muted-foreground hover:text-foreground" : "text-white/70 hover:text-white"}`}
           >
-            Accessories
+            Portfolio
           </Link>
         </nav>
 
@@ -64,7 +64,7 @@ export function Header() {
             href="#reserve"
             className={`px-4 py-2 text-sm font-medium transition-all rounded-full ${isScrolled ? "bg-foreground text-background hover:opacity-80" : "bg-white text-foreground hover:bg-white/90"}`}
           >
-            Buy the product
+            Schedule Viewing
           </Link>
         </div>
 
@@ -88,14 +88,14 @@ export function Header() {
               className="text-lg text-foreground"
               onClick={() => setIsMenuOpen(false)}
             >
-              Products
+              Residences
             </Link>
             <Link
               href="#technology"
               className="text-lg text-foreground"
               onClick={() => setIsMenuOpen(false)}
             >
-              Technology
+              Architecture
             </Link>
             <Link
               href="#gallery"
@@ -109,14 +109,14 @@ export function Header() {
               className="text-lg text-foreground"
               onClick={() => setIsMenuOpen(false)}
             >
-              Accessories
+              Portfolio
             </Link>
             <Link
               href="#reserve"
               className="mt-4 bg-foreground px-5 py-3 text-center text-sm font-medium text-background rounded-full"
               onClick={() => setIsMenuOpen(false)}
             >
-              Reserve
+              Schedule Viewing
             </Link>
           </nav>
         </div>

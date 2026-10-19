@@ -12,14 +12,14 @@ export function GallerySection() {
   const lastScrollRef = useRef(0);
 
   const images = [
-    { src: "/images/bottle-bike.png", alt: "Thermal bottle on bike" },
-    { src: "/images/bottle-lake.png", alt: "Thermal bottle by lake" },
-    { src: "/images/bottle-water.png", alt: "Thermal bottle in water" },
-    { src: "/images/bottle-stream.png", alt: "Thermal bottle by stream" },
-    { src: "/images/bottle-fire.png", alt: "Thermal bottle by fire" },
-    { src: "/images/bottle-snow.png", alt: "Thermal bottle in snow" },
-    { src: "/images/bottle-mountain.png", alt: "Thermal bottle on mountain" },
-    { src: "/images/bottle-canyon.png", alt: "Thermal bottle at canyon" },
+    { src: "/images/estate-hero-main.jpg", alt: "Twilight architectural estate with infinity reflection pool" },
+    { src: "/images/feature-architecture.jpg", alt: "Cantilevered concrete and bronze modern architecture" },
+    { src: "/images/feature-panoramic.jpg", alt: "Panoramic ocean sunset sunken terrace lounge" },
+    { src: "/images/feature-smarthome.jpg", alt: "Modern luxury living space with automated lighting" },
+    { src: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1400", alt: "Architectural modern estate exterior" },
+    { src: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1400", alt: "Luxury minimalist interior and terrace" },
+    { src: "https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?q=80&w=1400", alt: "Designer kitchen with marble waterfall island" },
+    { src: "/images/architecture-center.jpg", alt: "Oceanfront coastal modern compound" },
   ];
 
   // Calculate section height based on content width
