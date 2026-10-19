@@ -60,25 +60,25 @@ function ScrollRevealText({ text }: { text: string }) {
 
 const sideImages = [
   {
-    src: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?q=80&w=1000",
+    src: "/images/feature-architecture.jpg",
     alt: "Modernist glass estate facade",
     position: "left",
     span: 1,
   },
   {
-    src: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=1000",
+    src: "/images/feature-smarthome.jpg",
     alt: "High-end architectural interior",
     position: "left",
     span: 1,
   },
   {
-    src: "https://images.unsplash.com/photo-1600573472550-8090b5e0745e?q=80&w=1000",
+    src: "/images/feature-panoramic.jpg",
     alt: "Contemporary luxury pool terrace",
     position: "right",
     span: 1,
   },
   {
-    src: "https://images.unsplash.com/photo-1600566752355-35792bedcfea?q=80&w=1000",
+    src: "/images/estate-residence-2.jpg",
     alt: "Architectural dining pavilion",
     position: "right",
     span: 1,
@@ -142,18 +142,26 @@ export function TechnologySection() {
   // Image transforms start after title fades (0.2 to 1)
   const imageProgress = Math.max(0, Math.min(1, (scrollProgress - 0.2) / 0.8));
   
-  // Smooth interpolations (responsive for mobile & desktop)
+  // Smooth interpolations (optimized so all images are balanced & visible on mobile and desktop)
   const centerWidth = isMobile
-    ? 100 - (imageProgress * 24)
-    : 100 - (imageProgress * 58);
+    ? 100 - (imageProgress * 52) // 100% down to 48% on mobile
+    : 100 - (imageProgress * 58); // 100% down to 42% on desktop
+  const centerHeight = isMobile
+    ? 100 - (imageProgress * 48) // 100% down to 52% on mobile to fit cleanly in viewport
+    : 100 - (imageProgress * 30);
   const sideWidth = isMobile
-    ? imageProgress * 12
+    ? imageProgress * 23.5 // reaches 23.5% on mobile (23.5 + 48 + 23.5 = 95%)
     : imageProgress * 22;
   const sideOpacity = imageProgress;
   const sideTranslateLeft = -100 + (imageProgress * 100);
   const sideTranslateRight = 100 - (imageProgress * 100);
-  const borderRadius = imageProgress * (isMobile ? 16 : 24);
-  const gap = imageProgress * (isMobile ? 8 : 16);
+  const borderRadius = imageProgress * (isMobile ? 12 : 24);
+  const gap = imageProgress * (isMobile ? 6 : 16);
+
+  // Vertical offset: 0 on mobile to keep all side images aligned and visible within viewport
+  const sideTranslateY = isMobile ? 0 : -(imageProgress * 15);
+  const paddingVal = imageProgress * (isMobile ? 6 : 16);
+  const paddingBottomVal = isMobile ? paddingVal : 60 + (imageProgress * 40);
 
   // Calculate grayscale for text section based on textProgress
   const grayscaleAmount = Math.round((1 - textProgress) * 100);
@@ -165,10 +173,13 @@ export function TechnologySection() {
         <div className="flex h-full w-full items-center justify-center">
           {/* Bento Grid Container */}
           <div 
-            className="relative flex h-full w-full items-stretch justify-center"
+            className="relative flex h-full w-full items-center justify-center"
             style={{ 
               gap: `${gap}px`, 
-              padding: `${imageProgress * (isMobile ? 8 : 16)}px` 
+              paddingTop: `${paddingVal}px`,
+              paddingLeft: `${paddingVal}px`,
+              paddingRight: `${paddingVal}px`,
+              paddingBottom: `${paddingBottomVal}px`,
             }}
           >
             
@@ -177,8 +188,9 @@ export function TechnologySection() {
               className="flex flex-col will-change-transform"
               style={{
                 width: `${sideWidth}%`,
+                height: `${centerHeight}%`,
                 gap: `${gap}px`,
-                transform: `translateX(${sideTranslateLeft}%)`,
+                transform: `translateX(${sideTranslateLeft}%) translateY(${sideTranslateY}%)`,
                 opacity: sideOpacity,
               }}
             >
@@ -192,9 +204,10 @@ export function TechnologySection() {
                   }}
                 >
                   <Image
-                    src={img.src || "/placeholder.svg"}
+                    src={img.src}
                     alt={img.alt}
                     fill
+                    sizes={isMobile ? "25vw" : "22vw"}
                     className="object-cover"
                   />
                 </div>
@@ -206,7 +219,7 @@ export function TechnologySection() {
               className="relative overflow-hidden will-change-transform"
               style={{
                 width: `${centerWidth}%`,
-                height: "100%",
+                height: `${centerHeight}%`,
                 flex: "0 0 auto",
                 borderRadius: `${borderRadius}px`,
               }}
@@ -215,6 +228,7 @@ export function TechnologySection() {
                 src="/images/architecture-center.jpg"
                 alt="Aerial view of luxury modern architectural oceanfront compound"
                 fill
+                sizes={isMobile ? "50vw" : "42vw"}
                 className="object-cover"
               />
               <div className="absolute inset-0 bg-foreground/40" />
@@ -257,8 +271,9 @@ export function TechnologySection() {
               className="flex flex-col will-change-transform"
               style={{
                 width: `${sideWidth}%`,
+                height: `${centerHeight}%`,
                 gap: `${gap}px`,
-                transform: `translateX(${sideTranslateRight}%)`,
+                transform: `translateX(${sideTranslateRight}%) translateY(${sideTranslateY}%)`,
                 opacity: sideOpacity,
               }}
             >
@@ -272,9 +287,10 @@ export function TechnologySection() {
                   }}
                 >
                   <Image
-                    src={img.src || "/placeholder.svg"}
+                    src={img.src}
                     alt={img.alt}
                     fill
+                    sizes={isMobile ? "25vw" : "22vw"}
                     className="object-cover"
                   />
                 </div>

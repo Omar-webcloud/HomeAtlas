@@ -7,25 +7,25 @@ const word = "HOMEATLAS";
 
 const sideImages = [
   {
-    src: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000",
+    src: "/images/collection-glass-pavilion.jpg",
     alt: "Modern luxury villa architecture",
     position: "left",
     span: 1,
   },
   {
-    src: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=1000",
+    src: "/images/estate-residence-1.jpg",
     alt: "Contemporary estate with reflection pool",
     position: "left",
     span: 1,
   },
   {
-    src: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1000",
+    src: "/images/collection-coastal-villa.jpg",
     alt: "Minimalist luxury living pavilion",
     position: "right",
     span: 1,
   },
   {
-    src: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=1000",
+    src: "/images/collection-sky-penthouse.jpg",
     alt: "Architectural terrace at dusk",
     position: "right",
     span: 1,
@@ -70,24 +70,26 @@ export function HeroSection() {
   // Image transforms start after text fades (0.2 to 1)
   const imageProgress = Math.max(0, Math.min(1, (scrollProgress - 0.2) / 0.8));
   
-  // Smooth interpolations (optimized for both mobile and desktop)
+  // Smooth interpolations (optimized so all images are balanced & visible on mobile and desktop)
   const centerWidth = isMobile 
-    ? 100 - (imageProgress * 24) // 100% to 76% on mobile so image stays prominent
-    : 100 - (imageProgress * 58); // 100% to 42% on desktop
+    ? 100 - (imageProgress * 52) // 100% down to 48% on mobile
+    : 100 - (imageProgress * 58); // 100% down to 42% on desktop
   const centerHeight = isMobile
-    ? 100 - (imageProgress * 20)
+    ? 100 - (imageProgress * 48) // 100% down to 52% on mobile to fit perfectly in viewport
     : 100 - (imageProgress * 30);
   const sideWidth = isMobile
-    ? imageProgress * 12
+    ? imageProgress * 23.5 // reaches 23.5% on mobile (23.5 + 48 + 23.5 = 95%)
     : imageProgress * 22;
   const sideOpacity = imageProgress;
   const sideTranslateLeft = -100 + (imageProgress * 100);
   const sideTranslateRight = 100 - (imageProgress * 100);
-  const borderRadius = imageProgress * (isMobile ? 16 : 24);
-  const gap = imageProgress * (isMobile ? 8 : 16);
+  const borderRadius = imageProgress * (isMobile ? 12 : 24);
+  const gap = imageProgress * (isMobile ? 6 : 16);
   
-  // Vertical offset for side columns
-  const sideTranslateY = -(imageProgress * (isMobile ? 8 : 15));
+  // Vertical offset: 0 on mobile to keep all side images aligned and visible within viewport
+  const sideTranslateY = isMobile ? 0 : -(imageProgress * 15);
+  const paddingVal = imageProgress * (isMobile ? 6 : 16);
+  const paddingBottomVal = isMobile ? paddingVal : 60 + (imageProgress * 40);
 
   return (
     <section ref={sectionRef} className="relative bg-background overflow-x-clip">
@@ -96,11 +98,13 @@ export function HeroSection() {
         <div className="flex h-full w-full items-center justify-center">
           {/* Bento Grid Container */}
           <div 
-            className="relative flex h-full w-full items-stretch justify-center"
+            className="relative flex h-full w-full items-center justify-center"
             style={{ 
               gap: `${gap}px`, 
-              padding: `${imageProgress * (isMobile ? 8 : 16)}px`, 
-              paddingBottom: `${isMobile ? 40 + (imageProgress * 30) : 60 + (imageProgress * 40)}px` 
+              paddingTop: `${paddingVal}px`,
+              paddingLeft: `${paddingVal}px`,
+              paddingRight: `${paddingVal}px`,
+              paddingBottom: `${paddingBottomVal}px`,
             }}
           >
             
@@ -109,6 +113,7 @@ export function HeroSection() {
               className="flex flex-col will-change-transform"
               style={{
                 width: `${sideWidth}%`,
+                height: `${centerHeight}%`,
                 gap: `${gap}px`,
                 transform: `translateX(${sideTranslateLeft}%) translateY(${sideTranslateY}%)`,
                 opacity: sideOpacity,
@@ -124,9 +129,10 @@ export function HeroSection() {
                   }}
                 >
                   <Image
-                    src={img.src || "/placeholder.svg"}
+                    src={img.src}
                     alt={img.alt}
                     fill
+                    sizes={isMobile ? "25vw" : "22vw"}
                     className="object-cover"
                   />
                 </div>
@@ -148,6 +154,7 @@ export function HeroSection() {
                 alt="Modern luxury architectural estate at sunset with infinity pool"
                 fill
                 className="object-cover"
+                sizes={isMobile ? "50vw" : "42vw"}
                 priority
               />
               
@@ -179,6 +186,7 @@ export function HeroSection() {
               className="flex flex-col will-change-transform"
               style={{
                 width: `${sideWidth}%`,
+                height: `${centerHeight}%`,
                 gap: `${gap}px`,
                 transform: `translateX(${sideTranslateRight}%) translateY(${sideTranslateY}%)`,
                 opacity: sideOpacity,
@@ -194,9 +202,10 @@ export function HeroSection() {
                   }}
                 >
                   <Image
-                    src={img.src || "/placeholder.svg"}
+                    src={img.src}
                     alt={img.alt}
                     fill
+                    sizes={isMobile ? "25vw" : "22vw"}
                     className="object-cover"
                   />
                 </div>
